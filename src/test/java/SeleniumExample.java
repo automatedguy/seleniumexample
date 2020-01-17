@@ -17,14 +17,12 @@ public class SeleniumExample {
         webDriver = new ChromeDriver(chromeOptions);
 
         webDriver.navigate().to("https://www.google.com");
-
         webDriver.findElement(By.xpath("//input[@name='q']")).sendKeys("Selenium webdriver");
-
         webDriver.findElement(By.xpath("(//input[@value='Buscar con Google'])[1]")).click();
-
         for(WebElement webElement: webDriver.findElements(By.xpath("//h3[@class='LC20lb']"))){
             webElement.getText().contains("Selenium webdriver");
         }
+
 
         webDriver.quit();
 
