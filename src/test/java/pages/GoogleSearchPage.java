@@ -4,6 +4,7 @@ import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class GoogleSearchPage extends BasePage {
 
     private WebDriver driver;
 
+    private String btnSignInLct = "//a[text()='Iniciar sesión']";
     private String inputSearchLct = "//input[@name='q']";
     private WebElement inputSearch;
     private String btnSearchLct = "(//input[@value='Buscar con Google'])[1]";
@@ -22,6 +24,13 @@ public class GoogleSearchPage extends BasePage {
         this.driver = driver;
         this.inputSearch = driver.findElement(By.xpath(inputSearchLct));
         this.btnSearch = driver.findElement(By.xpath(btnSearchLct));
+    }
+
+    public GoogleLoginEmailPage clickSignInButton(){
+        WebElement btnSignIn = this.driver.findElement(By.xpath(btnSignInLct));
+        setWebElement(btnSignIn);
+        click();
+        return new GoogleLoginEmailPage(this.driver);
     }
 
     public void enterSearchText(String searchText){

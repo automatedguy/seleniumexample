@@ -12,9 +12,9 @@ import static base.Constants.*;
 
 public class BaseTest {
 
-    public WebDriver driver;
-    ChromeOptions chromeOptions = new ChromeOptions();
-    public GoogleSearchPage googleSearchPage;
+    private WebDriver driver;
+    private ChromeOptions chromeOptions = new ChromeOptions();
+    protected GoogleSearchPage googleSearchPage;
 
     @BeforeClass
     public void setUp(){
