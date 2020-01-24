@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import pages.GoogleSearchPage;
 
 import static base.Constants.*;
 
@@ -13,6 +14,7 @@ public class BaseTest {
 
     public WebDriver driver;
     ChromeOptions chromeOptions = new ChromeOptions();
+    public GoogleSearchPage googleSearchPage;
 
     @BeforeClass
     public void setUp(){
@@ -30,5 +32,6 @@ public class BaseTest {
     @BeforeMethod
     public void navigateToBaseUrl(){
         driver.navigate().to(BASE_URL);
+        googleSearchPage = new GoogleSearchPage(driver);
     }
 }

@@ -9,17 +9,20 @@ import java.util.List;
 
 public class GoogleSearchPage extends BasePage {
 
-    WebDriver driver;
+    private WebDriver driver;
+
+    private String inputSearchLct = "//input[@name='q']";
+    private WebElement inputSearch;
+    private String btnSearchLct = "(//input[@value='Buscar con Google'])[1]";
+    private WebElement btnSearch;
+    private String resultsLct = "//h3[@class='LC20lb']";
 
     public GoogleSearchPage(WebDriver driver) {
         super(driver);
-        this.inputSearch = driver.findElement(By.xpath("//input[@name='q']"));
-        this.btnSearch = driver.findElement(By.xpath("(//input[@value='Buscar con Google'])[1]"));
+        this.driver = driver;
+        this.inputSearch = driver.findElement(By.xpath(inputSearchLct));
+        this.btnSearch = driver.findElement(By.xpath(btnSearchLct));
     }
-
-    private WebElement inputSearch;
-    private WebElement btnSearch;
-    private List<WebElement> results;
 
     public void enterSearchText(String searchText){
         setWebElement(this.inputSearch);
@@ -32,7 +35,7 @@ public class GoogleSearchPage extends BasePage {
     }
 
     public boolean isSearchFound(String searchPattern){
-        results = this.driver.findElements(By.xpath("//h3[@class='LC20lb']"));
+        List<WebElement> results = this.driver.findElements(By.xpath(resultsLct));
         setWebElementsList(results);
         return isMatchFound(searchPattern);
     }
