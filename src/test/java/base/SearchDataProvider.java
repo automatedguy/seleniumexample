@@ -6,6 +6,6 @@ public class SearchDataProvider {
 
     @DataProvider(name = "searchPatternDataProvider")
     public Object[][] getSearchPattern(){
-        return new Object[][]{{"CNN"},{"ABC"}};
+        return new Object[][]{{"CNN"},{"ABC"},{"HBO"},{"Sony"},{"FOX"},{"WB"}};
     }
 }
