@@ -6,20 +6,13 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class BasePage {
-
-    // TODO: Make class abstract change to methods to protected.
+public abstract class BasePage {
 
     WebDriver driver;
-    private WebElement webElement;
     private List<WebElement> webElementsList;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-    }
-
-    protected void setWebElement(WebElement webElement) {
-        this.webElement = webElement;
     }
 
     protected void setWebElementsList(List<WebElement> webElementsList) {
@@ -27,14 +20,14 @@ public class BasePage {
     }
 
 
-    public void click(){
+    protected void click(WebElement webElement){
         System.out.println("Clicking on button.");
         int attempt = 0;
         boolean clicked = false;
 
         do {
             try {
-                this.webElement.click();
+                webElement.click();
                 clicked = true;
             } catch (ElementNotInteractableException e) {
                 attempt++;
@@ -49,13 +42,13 @@ public class BasePage {
         } while (attempt < 3 && !clicked);
     }
 
-    public void enterText(String text){
+    protected void enterText(WebElement webElement, String text){
         System.out.println("Entering text:" + text);
-        this.webElement.sendKeys(text);
+        webElement.sendKeys(text);
     }
 
 
-    public boolean isMatchFound(String searchPattern){
+    protected boolean isMatchFound(String searchPattern){
         for(WebElement element : this.webElementsList){
             if(element.getText().contains(searchPattern)){
                 return true;

@@ -3,6 +3,7 @@ package base;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -32,6 +33,6 @@ public class BaseTest {
     @BeforeMethod
     public void navigateToBaseUrl(){
         driver.navigate().to(BASE_URL);
-        googleSearchPage = new GoogleSearchPage(driver);
+        googleSearchPage = PageFactory.initElements(driver, GoogleSearchPage.class);
     }
 }

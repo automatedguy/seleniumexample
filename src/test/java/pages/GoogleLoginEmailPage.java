@@ -1,34 +1,33 @@
 package pages;
 
 import base.BasePage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
 public class GoogleLoginEmailPage extends BasePage {
 
-    WebDriver driver;
+    private WebDriver driver;
 
-    private String inputEmailLct = "//input[@type='email']";
+    @FindBy(how = How.XPATH, using = "//input[@type='email']")
     private WebElement inputEmail;
-    private String btnNextLct = "//div[@id='identifierNext']";
+
+    @FindBy(how = How.XPATH, using = "//div[@id='identifierNext']")
     private WebElement btnNext;
 
     public GoogleLoginEmailPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
-        this.inputEmail = driver.findElement(By.xpath(inputEmailLct));
-        this.btnNext = driver.findElement(By.xpath(btnNextLct));
-
-    }
-
-    public void clickNextButton() {
-        setWebElement(this.btnNext);
-        click();
     }
 
     public void enterEmail(String emailAddress){
-        setWebElement(inputEmail);
-        enterText(emailAddress);
+        enterText(this.inputEmail, emailAddress);
+    }
+
+    public GoogleLoginPassPage clickNextButton() {
+        click(this.btnNext);
+        return PageFactory.initElements(driver, GoogleLoginPassPage.class);
     }
 }

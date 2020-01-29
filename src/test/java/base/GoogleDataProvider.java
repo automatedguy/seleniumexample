@@ -2,7 +2,7 @@ package base;
 
 import org.testng.annotations.DataProvider;
 
-public class SearchDataProvider {
+public class GoogleDataProvider {
 
     @DataProvider(name = "searchPatternDataProvider")
     public Object[][] getSearchPattern(){

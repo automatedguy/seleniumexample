@@ -4,7 +4,10 @@ import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+
 
 import java.util.List;
 
@@ -12,35 +15,33 @@ public class GoogleSearchPage extends BasePage {
 
     private WebDriver driver;
 
-    private String btnSignInLct = "//a[text()='Iniciar sesión']";
-    private String inputSearchLct = "//input[@name='q']";
+    @FindBy(how = How.XPATH, using = "//a[text()='Iniciar sesión']")
+    private WebElement btnSignIn;
+
+    @FindBy(how = How.XPATH, using = "//input[@name='q']")
     private WebElement inputSearch;
-    private String btnSearchLct = "(//input[@value='Buscar con Google'])[1]";
+
+    @FindBy(how = How.XPATH, using = "(//input[@value='Buscar con Google'])[1]")
     private WebElement btnSearch;
+
     private String resultsLct = "//h3[@class='LC20lb']";
 
     public GoogleSearchPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
-        this.inputSearch = driver.findElement(By.xpath(inputSearchLct));
-        this.btnSearch = driver.findElement(By.xpath(btnSearchLct));
     }
 
     public GoogleLoginEmailPage clickSignInButton(){
-        WebElement btnSignIn = this.driver.findElement(By.xpath(btnSignInLct));
-        setWebElement(btnSignIn);
-        click();
-        return new GoogleLoginEmailPage(this.driver);
+        click(this.btnSignIn);
+        return PageFactory.initElements(driver, GoogleLoginEmailPage.class);
     }
 
     public void enterSearchText(String searchText){
-        setWebElement(this.inputSearch);
-        enterText(searchText);
+        enterText(this.inputSearch, searchText);
     }
 
     public void clickSearchButton() {
-        setWebElement(this.btnSearch);
-        click();
+        click(this.btnSearch);
     }
 
     public boolean isSearchFound(String searchPattern){
